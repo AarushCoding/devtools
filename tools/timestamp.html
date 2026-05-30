@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timestamp</title>
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<div class="container">
+
+<h1>Unix Timestamp</h1>
+
+<button onclick="now()">Get Current Timestamp</button>
+<pre id="out"></pre>
+
+</div>
+
+<script>
+function now(){
+    document.getElementById("out").textContent =
+        Math.floor(Date.now() / 1000);
+}
+</script>
+
+</body>
+</html>

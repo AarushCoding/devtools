@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="../styles.css">
+<title>Color Palette</title>
+</head>
+<body>
+
+<div class="container">
+
+<h1>Color Palette Saver</h1>
+
+<input type="color" id="color">
+<button onclick="save()">Save</button>
+
+<div id="list"></div>
+
+</div>
+
+<script>
+function save(){
+    const color = document.getElementById("color").value;
+    let colors = JSON.parse(localStorage.getItem("colors") || "[]");
+
+    colors.push(color);
+    localStorage.setItem("colors", JSON.stringify(colors));
+
+    render();
+}
+
+function render(){
+    const list = document.getElementById("list");
+    const colors = JSON.parse(localStorage.getItem("colors") || "[]");
+
+    list.innerHTML = colors.map(c =>
+        `<div style="background:${c};padding:10px;margin:5px;border-radius:8px">${c}</div>`
+    ).join("");
+}
+
+render();
+</script>
+
+</body>
+</html>

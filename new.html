@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DevSuite Ultimate — 21 Professional Utilities</title>
+    <title>devtools - Aarush Naik</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -299,18 +299,17 @@
                 margin-left: 0;
                 padding: 2rem;
             }
-            .responsive-hamburger {
-                display: block;
-            }
+
         }
     </style>
 </head>
 <body>
 
     <div class="aside-parent">
+
         <aside>
 
-            <div class="brand">DevSuite Ultimate</div>
+            <div class="brand">devtools</div>
             <ul class="nav-list">
                 <input type="text" id="nav-search" placeholder="Search utilities..." oninput="filterNav()">
                 <li class="nav-item active"><button onclick="switchTab('palette')">Color Saver</button></li>
@@ -360,6 +359,27 @@
     <main>
         <div id="palette" class="tool-panel active">
             <h2>Color Saver</h2>
+            <select class="tool">
+                <option value="palette selected">Color Saver</option>
+                <option value="contrast">Contrast Checker (WCAG)</option>
+                <option value="snippets">Snippet Manager</option>
+                <option value="api-tester">API Endpoints Tester</option>
+                <option value="json-tool">JSON Formatter</option>
+                <option value="jwt-tool">JWT Decoder</option>
+                <option value="timestamp">Timestamp Converter</option>
+                <option value="encoder">URL / Base64 Codec</option>
+                <option value="hash">Hash Generator</option>
+                <option value="uuid">UUID Generator</option>
+                <option value="cron">CRON Expression Builder</option>
+                <option value="blindness">Colour Blindness Sim</option>
+                <option value="css-gen">CSS Playground</option>
+                <option value="text-diff">Text Difference</option>
+                <option value="markdown">Markdown Editor</option>
+                <option value="qr-gen">QR Code Generator</option>
+                <option value="html-strip">Raw HTML Text Stripper</option>
+                <option value="case-conv">Variable Case Converter</option>
+                <option value="meta-preview">SEO Meta Tag Previewer</option>
+            </select>
             <div class="row">
                 <div class="group" style="flex:1; max-width:475px;"><label>Hex Code String</label><input type="text" id="palette-hex" value="#58A6FF"></div>
             </div>
@@ -369,6 +389,27 @@
 
         <div id="contrast" class="tool-panel">
             <h2>Contrast Checker (WCAG)</h2>
+            <select class="tool">
+                <option value="palette">Color Saver</option>
+                <option value="contrast selected">Contrast Checker (WCAG)</option>
+                <option value="snippets">Snippet Manager</option>
+                <option value="api-tester">API Endpoints Tester</option>
+                <option value="json-tool">JSON Formatter</option>
+                <option value="jwt-tool">JWT Decoder</option>
+                <option value="timestamp">Timestamp Converter</option>
+                <option value="encoder">URL / Base64 Codec</option>
+                <option value="hash">Hash Generator</option>
+                <option value="uuid">UUID Generator</option>
+                <option value="cron">CRON Expression Builder</option>
+                <option value="blindness">Colour Blindness Sim</option>
+                <option value="css-gen">CSS Playground</option>
+                <option value="text-diff">Text Difference</option>
+                <option value="markdown">Markdown Editor</option>
+                <option value="qr-gen">QR Code Generator</option>
+                <option value="html-strip">Raw HTML Text Stripper</option>
+                <option value="case-conv">Variable Case Converter</option>
+                <option value="meta-preview">SEO Meta Tag Previewer</option>
+            </select>
             <div class="row">
                 <div class="group" style="max-width: 335px;"><label>Foreground Hex</label><input type="text" id="contrast-fore" value="000000" maxlength="6"></div>
                 <div class="group" style="max-width: 335px;"><label>Background Hex</label><input type="text" id="contrast-back" value="FFFFFF" maxlength="6"></div>
@@ -384,6 +425,27 @@
 
         <div id="snippets" class="tool-panel">
             <h2>Snippet Manager</h2>
+            <select class="tool">
+                <option value="palette">Color Saver</option>
+                <option value="contrast">Contrast Checker (WCAG)</option>
+                <option value="snippets">Snippet Manager</option>
+                <option value="api-tester">API Endpoints Tester</option>
+                <option value="json-tool">JSON Formatter</option>
+                <option value="jwt-tool">JWT Decoder</option>
+                <option value="timestamp">Timestamp Converter</option>
+                <option value="encoder">URL / Base64 Codec</option>
+                <option value="hash">Hash Generator</option>
+                <option value="uuid">UUID Generator</option>
+                <option value="cron">CRON Expression Builder</option>
+                <option value="blindness">Colour Blindness Sim</option>
+                <option value="css-gen">CSS Playground</option>
+                <option value="text-diff">Text Difference</option>
+                <option value="markdown">Markdown Editor</option>
+                <option value="qr-gen">QR Code Generator</option>
+                <option value="html-strip">Raw HTML Text Stripper</option>
+                <option value="case-conv">Variable Case Converter</option>
+                <option value="meta-preview">SEO Meta Tag Previewer</option>
+            </select>
             <div class="group"><label>Reference Label</label><input type="text" id="snippet-title" placeholder="e.g., Axios Client Base config"></div>
             <div class="group"><label>Code Payload</label><textarea id="snippet-body" class="mono" placeholder="const client = axios.create({});"></textarea></div>
             <button class="btn" onclick="saveSnippet()">Save Snippet</button>
@@ -392,6 +454,27 @@
 
         <div id="api-tester" class="tool-panel">
             <h2>API Endpoints Tester</h2>
+            <select class="tool">
+                <option value="palette">Color Saver</option>
+                <option value="contrast">Contrast Checker (WCAG)</option>
+                <option value="snippets">Snippet Manager</option>
+                <option value="api-tester" selected>API Endpoints Tester</option>
+                <option value="json-tool">JSON Formatter</option>
+                <option value="jwt-tool">JWT Decoder</option>
+                <option value="timestamp">Timestamp Converter</option>
+                <option value="encoder">URL / Base64 Codec</option>
+                <option value="hash">Hash Generator</option>
+                <option value="uuid">UUID Generator</option>
+                <option value="cron">CRON Expression Builder</option>
+                <option value="blindness">Colour Blindness Sim</option>
+                <option value="css-gen">CSS Playground</option>
+                <option value="text-diff">Text Difference</option>
+                <option value="markdown">Markdown Editor</option>
+                <option value="qr-gen">QR Code Generator</option>
+                <option value="html-strip">Raw HTML Text Stripper</option>
+                <option value="case-conv">Variable Case Converter</option>
+                <option value="meta-preview">SEO Meta Tag Previewer</option>
+            </select>
             <div class="row">
                 <div class="group" style="max-width: 150px;">
                     <label>Method Type</label>
@@ -433,7 +516,7 @@
         </div>
 
         <div id="encoder" class="tool-panel">
-            <h2>URL / Base64 Codec Engine</h2>
+            <h2>URL / Base64 Coding</h2>
             <div class="group"><label>Target Source String</label><textarea id="codec-input" placeholder="Working buffer inputs..."></textarea></div>
             <div class="row">
                 <button class="btn" onclick="runCodec('url-enc')">URL Encode</button>
@@ -465,7 +548,7 @@
         </div>
 
         <div id="cron" class="tool-panel">
-            <h2>CRON Expression Builder</h2>
+            <h2>CRON Builder</h2>
             <div class="row">
                 <div class="group" style="max-width:120px;"><label>Minutes</label><input type="text" id="cron-m" value="*"></div>
                 <div class="group" style="max-width:120px;"><label>Hours</label><input type="text" id="cron-h" value="*"></div>
@@ -563,20 +646,28 @@
     </main>
 
     <script>
-        document.querySelector('.responsive-hamburger').addEventListener('click', () => {
-            const aside = document.querySelector('aside');
-            aside.style.display = aside.style.display === 'flex' ? 'none' : 'flex';
+        switchTab('palette'); // Default landing tab
+        document.querySelector('.tool').addEventListener('change', function() {
+            switchTab(this.value);
         });
 
         // Tab Switchboard System Routing
-        function switchTab(tabId) {
-            document.querySelectorAll('.tool-panel').forEach(panel => panel.classList.remove('active'));
-            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+        function switchTab(tabId, el = null) {
+            document.querySelectorAll('.tool-panel')
+                .forEach(panel => panel.classList.remove('active'));
+
+            document.querySelectorAll('.nav-item')
+                .forEach(item => item.classList.remove('active'));
 
             document.getElementById(tabId).classList.add('active');
-            event.currentTarget.parentElement.classList.add('active');
 
-            if(tabId === 'blindness') renderCVD();
+            if(el){
+                el.parentElement.classList.add('active');
+            }
+
+            if(tabId === 'blindness'){
+                renderCVD();
+            }
         }
 
         // Navigation Search Filter
@@ -878,6 +969,8 @@
             document.getElementById('mock-meta-title').textContent = document.getElementById('meta-title').value;
             document.getElementById('mock-meta-desc').textContent = document.getElementById('meta-desc').value;
         }
+
+
     </script>
 </body>
 </html>

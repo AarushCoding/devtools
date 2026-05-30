@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diff Checker</title>
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<div class="container">
+
+<h1>Text Diff Checker</h1>
+
+<textarea id="a" placeholder="Text A"></textarea>
+<textarea id="b" placeholder="Text B"></textarea>
+
+<button onclick="diff()">Compare</button>
+
+<pre id="out"></pre>
+
+</div>
+
+<script>
+function diff(){
+    const a = document.getElementById("a").value;
+    const b = document.getElementById("b").value;
+
+    document.getElementById("out").textContent =
+        a === b ? "No differences" : "Texts are different";
+}
+</script>
+
+</body>
+</html>

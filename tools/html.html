@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML Escape</title>
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<div class="container">
+
+<h1>HTML Escape</h1>
+
+<textarea id="text"></textarea>
+
+<button onclick="esc()">Escape</button>
+
+<pre id="out"></pre>
+
+</div>
+
+<script>
+function esc(){
+    const v = document.getElementById("text").value
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;");
+
+    document.getElementById("out").textContent = v;
+}
+</script>
+
+</body>
+</html>

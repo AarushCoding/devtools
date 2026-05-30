@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>URL Encoder</title>
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<div class="container">
+
+<h1>URL Encode / Decode</h1>
+
+<textarea id="text"></textarea>
+
+<button onclick="enc()">Encode</button>
+<button onclick="dec()">Decode</button>
+
+<pre id="out"></pre>
+
+</div>
+
+<script>
+function enc(){
+    document.getElementById("out").textContent =
+        encodeURIComponent(document.getElementById("text").value);
+}
+
+function dec(){
+    document.getElementById("out").textContent =
+        decodeURIComponent(document.getElementById("text").value);
+}
+</script>
+
+</body>
+</html>

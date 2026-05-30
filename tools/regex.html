@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="../styles.css">
+<title>Regex Tester</title>
+</head>
+<body>
+
+<div class="container">
+
+<h1>Regex Tester</h1>
+
+<input id="pattern" placeholder="Enter regex">
+<textarea id="text" placeholder="Test text"></textarea>
+
+<button onclick="run()">Test</button>
+
+<pre id="out"></pre>
+
+</div>
+
+<script>
+function run(){
+    const pattern = document.getElementById("pattern").value;
+    const text = document.getElementById("text").value;
+
+    try{
+        const regex = new RegExp(pattern, "g");
+        const matches = text.match(regex);
+        document.getElementById("out").textContent =
+            matches ? JSON.stringify(matches, null, 2) : "No matches";
+    } catch(e){
+        document.getElementById("out").textContent = "Invalid regex";
+    }
+}
+</script>
+
+</body>
+</html>

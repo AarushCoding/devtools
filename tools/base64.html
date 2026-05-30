@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="../styles.css">
+<title>Base64</title>
+</head>
+<body>
+
+<div class="container">
+
+<h1>Base64 Encode / Decode</h1>
+
+<textarea id="text"></textarea>
+
+<button onclick="enc()">Encode</button>
+<button onclick="dec()">Decode</button>
+
+<pre id="out"></pre>
+
+</div>
+
+<script>
+function enc(){
+    const val = btoa(document.getElementById("text").value);
+    document.getElementById("out").textContent = val;
+}
+
+function dec(){
+    const val = atob(document.getElementById("text").value);
+    document.getElementById("out").textContent = val;
+}
+</script>
+
+</body>
+</html>
