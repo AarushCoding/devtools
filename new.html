@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DevSuite Ultimate — 21 Professional Utilities</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-main: #0d1117;
+            --bg-card: #161b22;
+            --bg-input: #21262d;
+            --border: #30363d;
+            --text-main: #c9d1d9;
+            --text-muted: #8b949e;
+            --accent: #58a6ff;
+            --success: #238636;
+            --error: #da3633;
+            --warning: #d29922;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Lexend', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Layout */
+        aside {
+            width: 300px;
+            background-color: var(--bg-card);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 10;
+            scrollbar-width: none;
+            overflow-y: hidden;
+        }
+
+        .brand {
+            padding: 1.5rem 2rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.03em;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-list {
+            list-style: none;
+            overflow-y: auto;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            flex: 1;
+        }
+
+        .nav-item button {
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            padding: 0.65rem 1rem;
+            border-radius: 6px;
+            font-family: 'Lexend', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item button:hover, .nav-item.active button {
+            color: #fff;
+            background-color: var(--bg-input);
+        }
+
+        .nav-item.active button {
+            border-left: 3px solid var(--accent);
+            border-radius: 0 6px 6px 0;
+        }
+
+        .sidebar-settings {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            border-top: 1px solid var(--border);
+            background-color: #0f141c;
+
+
+        }
+
+        .sidebar-settings button {
+            background-color: var(--bg-input);
+            color: #fff;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.75rem 1.25rem;
+            font-family: 'Lexend', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transform: scale(1);
+            transition: transform 0.2s ease;
+
+        }
+
+        .sidebar-settings button:hover {
+            transform: scale(1.05);
+            transition: transform 0.2s ease;
+
+        }
+
+        /* Main Viewport Content */
+        main {
+            margin-left: 300px;
+            flex: 1;
+            padding: 3rem 4rem;
+            max-width: 1200px;
+        }
+
+        .tool-panel {
+            display: none;
+        }
+
+        .tool-panel.active {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            animation: fadeIn 0.15s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(2px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.02em;
+        }
+
+        .description {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-top: -1.25rem;
+            max-width: 700px;
+        }
+
+        /* Forms and Grid Layouts */
+        .group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            width: 100%;
+            max-width: 700px;
+        }
+
+        .row {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+
+        label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+        }
+
+        input[type="text"], input[type="number"], textarea, select {
+            width: 100%;
+            background-color: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.75rem 1rem;
+            color: #fff;
+            font-size: 0.95rem;
+            font-family: 'Lexend', sans-serif;
+            transition: border-color 0.2s ease;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        textarea.mono, pre, code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        button.btn {
+            background-color: var(--success);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 0.75rem 1.25rem;
+            font-family: 'Lexend', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+            width: fit-content;
+        }
+
+        button.btn:hover { opacity: 0.9; }
+        button.btn-secondary { background-color: var(--bg-input); border: 1px solid var(--border); color: #fff; }
+        button.btn-accent { background-color: var(--accent); color: #0d1117; }
+
+        /* Output Formats */
+        .output-box {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1.25rem;
+            width: 100%;
+            max-width: 700px;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        /* Specialized Interactive Render Frames */
+        .color-badge-container { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+        .color-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 0.75rem;
+            border-radius: 6px;
+            text-align: center;
+            width: 120px;
+        }
+        .color-preview { height: 50px; border-radius: 4px; margin-bottom: 0.5rem; border: 1px solid rgba(255,255,255,0.1); }
+        .wcag-status { font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.85rem; }
+        .status-pass { background-color: rgba(35, 134, 54, 0.2); color: #56d364; }
+        .status-fail { background-color: rgba(218, 54, 51, 0.2); color: #f85149; }
+
+        .visual-preview {
+            width: 100%;
+            max-width: 700px;
+            height: 180px;
+            background-color: #fff;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-weight: 500;
+        }
+
+        #nav-search {
+            padding: 0.5rem 1rem;
+            margin-bottom: 0.75rem;
+            background-color: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: #fff;
+            font-size: 0.9rem;
+            font-family: 'Lexend', sans-serif;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            aside {
+                display: none;
+            }
+            main {
+                margin-left: 0;
+                padding: 2rem;
+            }
+            .responsive-hamburger {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="aside-parent">
+        <aside>
+
+            <div class="brand">DevSuite Ultimate</div>
+            <ul class="nav-list">
+                <input type="text" id="nav-search" placeholder="Search utilities..." oninput="filterNav()">
+                <li class="nav-item active"><button onclick="switchTab('palette')">Color Saver</button></li>
+                <li class="nav-item"><button onclick="switchTab('contrast')">Contrast Checker (WCAG)</button></li>
+                <li class="nav-item"><button onclick="switchTab('snippets')">Snippet Manager</button></li>
+                <li class="nav-item"><button onclick="switchTab('api-tester')">API Endpoints Tester</button></li>
+                <li class="nav-item"><button onclick="switchTab('json-tool')">JSON Formatter</button></li>
+                <li class="nav-item"><button onclick="switchTab('jwt-tool')">JWT Decoder</button></li>
+                <li class="nav-item"><button onclick="switchTab('timestamp')">Timestamp Converter</button></li>
+                <li class="nav-item"><button onclick="switchTab('encoder')">URL / Base64 Codec</button></li>
+                <li class="nav-item"><button onclick="switchTab('hash')">Hash Generator</button></li>
+                <li class="nav-item"><button onclick="switchTab('uuid')">UUID Generator</button></li>
+                <li class="nav-item"><button onclick="switchTab('cron')">CRON Expression Builder</button></li>
+                <li class="nav-item"><button onclick="switchTab('blindness')">Colour Blindness Sim</button></li>
+                <li class="nav-item"><button onclick="switchTab('css-gen')">CSS Playground</button></li>
+                <li class="nav-item"><button onclick="switchTab('text-diff')">Text Difference</button></li>
+                <li class="nav-item"><button onclick="switchTab('markdown')">Markdown Editor</button></li>
+                <li class="nav-item"><button onclick="switchTab('qr-gen')">QR Code Generator</button></li>
+                <li class="nav-item"><button onclick="switchTab('html-strip')">Raw HTML Text Stripper</button></li>
+                <li class="nav-item"><button onclick="switchTab('case-conv')">Variable Case Converter</button></li>
+                <li class="nav-item"><button onclick="switchTab('meta-preview')">SEO Meta Tag Previewer</button></li>
+            </ul>
+
+            <div class="sidebar-settings">
+                <button class="btn btn-secondary" onclick="window.open('https://forms.gle/F233aQ9vPr47Hj5P6', '_blank')">Submit Feedback</button>
+            </div>
+
+
+            <script
+            data-name="BMC-Widget"
+            data-cfasync="false"
+            src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js"
+            data-id="aarushnaik" data-description="Support me on Buy me a coffee!"
+            data-message="Hello! Help keep me free of charge by buying me a coffee. I appreciate your support!"
+            data-color="#5F7FFF"
+            data-position="Right"
+            data-x_margin="18"
+            data-y_margin="18">
+            </script>
+
+
+
+        </aside>
+    </div>
+
+
+    <main>
+        <div id="palette" class="tool-panel active">
+            <h2>Color Saver</h2>
+            <div class="row">
+                <div class="group" style="flex:1; max-width:475px;"><label>Hex Code String</label><input type="text" id="palette-hex" value="#58A6FF"></div>
+            </div>
+            <button class="btn" onclick="addPaletteColor()">Save Tint to Row</button>
+            <div class="color-badge-container" id="palette-display"></div>
+        </div>
+
+        <div id="contrast" class="tool-panel">
+            <h2>Contrast Checker (WCAG)</h2>
+            <div class="row">
+                <div class="group" style="max-width: 335px;"><label>Foreground Hex</label><input type="text" id="contrast-fore" value="000000" maxlength="6"></div>
+                <div class="group" style="max-width: 335px;"><label>Background Hex</label><input type="text" id="contrast-back" value="FFFFFF" maxlength="6"></div>
+            </div>
+            <div class="output-box">
+                <p style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Luminance Ratio: <span id="contrast-ratio">0.00</span></p>
+                <p style="margin-bottom:0.4rem;">WCAG AA Small text format: <span id="cc-aa-normal" class="wcag-status">FAIL</span></p>
+                <p style="margin-bottom:0.4rem;">WCAG AAA Small text format: <span id="cc-aaa-normal" class="wcag-status">FAIL</span></p>
+                <p style="margin-bottom:0.4rem;">WCAG AA Structural large layout text: <span id="cc-aa-large" class="wcag-status">FAIL</span></p>
+                <p>WCAG AAA Structural large layout text: <span id="cc-aaa-large" class="wcag-status">FAIL</span></p>
+            </div>
+        </div>
+
+        <div id="snippets" class="tool-panel">
+            <h2>Snippet Manager</h2>
+            <div class="group"><label>Reference Label</label><input type="text" id="snippet-title" placeholder="e.g., Axios Client Base config"></div>
+            <div class="group"><label>Code Payload</label><textarea id="snippet-body" class="mono" placeholder="const client = axios.create({});"></textarea></div>
+            <button class="btn" onclick="saveSnippet()">Save Snippet</button>
+            <div id="snippet-list" class="group"></div>
+        </div>
+
+        <div id="api-tester" class="tool-panel">
+            <h2>API Endpoints Tester</h2>
+            <div class="row">
+                <div class="group" style="max-width: 150px;">
+                    <label>Method Type</label>
+                    <select id="api-method"><option>GET</option><option>POST</option><option>PUT</option><option>DELETE</option></select>
+                </div>
+                <div class="group" style="flex:1; max-width:525px;"><label>Target URL Endpoint</label><input type="text" id="api-url" value="https://jsonplaceholder.typicode.com/todos/1"></div>
+            </div>
+            <div class="group"><label>Optional Request Body Parameters</label><textarea id="api-body" class="mono" placeholder="{}"></textarea></div>
+            <button class="btn" onclick="runApiCall()">Send Request</button>
+            <label>Output / Diagnostics Trace Logs</label>
+            <pre class="output-box" id="api-output" style="max-height: 250px; overflow-y: auto;">Pipeline idle.</pre>
+        </div>
+
+        <div id="json-tool" class="tool-panel">
+            <h2>JSON Formatter & Validator</h2>
+            <div class="group"><label>Raw Input String</label><textarea id="json-input" class="mono" placeholder='{"debug":true,"payload":{"id":100}}'></textarea></div>
+            <div class="row">
+                <button class="btn" onclick="processJson(true)">Beautify JSON</button>
+                <button class="btn btn-secondary" onclick="processJson(false)">Minify Data Blocks</button>
+            </div>
+            <label>Output / Diagnostics Trace Logs</label>
+            <pre class="output-box" id="json-output">Trace layer awaiting input payload.</pre>
+        </div>
+
+        <div id="jwt-tool" class="tool-panel">
+            <h2>JWT Decoder</h2>
+            <div class="group"><label>Raw Encoded Token Payload</label><textarea id="jwt-input" class="mono" placeholder="Paste your token here..."></textarea></div>
+            <div class="row">
+                <div class="group" style="max-width: 335px;"><label>Header Structure Block</label><pre class="output-box" id="jwt-header" style="max-width:100%;">-</pre></div>
+                <div class="group" style="max-width: 335px;"><label>Payload Object Data</label><pre class="output-box" id="jwt-payload" style="max-width:100%;">-</pre></div>
+            </div>
+        </div>
+
+        <div id="timestamp" class="tool-panel">
+            <h2>Timestamp Converter</h2>
+            <div class="group"><label>Epoch Timestamp (seconds format)</label><input type="number" id="time-epoch" placeholder="e.g., 1716480000"></div>
+            <button class="btn" onclick="convertEpoch()">Convert Unix Sequence</button>
+            <div class="group"><label>Local & GMT String Interpretations</label><div class="output-box" id="time-output-human">-</div></div>
+        </div>
+
+        <div id="encoder" class="tool-panel">
+            <h2>URL / Base64 Codec Engine</h2>
+            <div class="group"><label>Target Source String</label><textarea id="codec-input" placeholder="Working buffer inputs..."></textarea></div>
+            <div class="row">
+                <button class="btn" onclick="runCodec('url-enc')">URL Encode</button>
+                <button class="btn btn-secondary" onclick="runCodec('url-dec')">URL Decode</button>
+                <button class="btn" onclick="runCodec('b64-enc')">Base64 Encode</button>
+                <button class="btn btn-secondary" onclick="runCodec('b64-dec')">Base64 Decode</button>
+            </div>
+            <label>Output Buffer Pipeline</label>
+            <div class="output-box" id="codec-output">-</div>
+        </div>
+
+        <div id="hash" class="tool-panel">
+            <h2>Hash Generator</h2>
+            <div class="group"><label>Hash Input</label><textarea id="hash-input" placeholder="Text payload items go here..."></textarea></div>
+            <div class="row">
+                <button class="btn" onclick="generateHash('SHA-1')">SHA-1 Matrix</button>
+                <button class="btn" onclick="generateHash('SHA-256')">SHA-256 Matrix</button>
+                <button class="btn" onclick="generateHash('SHA-512')">SHA-512 Matrix</button>
+            </div>
+            <label>Hash Value</label>
+            <div class="output-box mono" id="hash-output">-</div>
+        </div>
+
+        <div id="uuid" class="tool-panel">
+            <h2>UUID Generator</h2>
+            <button class="btn" onclick="generateUUID()">Generate UUID v4 Token</button>
+            <label>Generated Sequence Token</label>
+            <div class="output-box mono" id="uuid-output" style="font-size:1.2rem; font-weight:700; color:var(--accent);">-</div>
+        </div>
+
+        <div id="cron" class="tool-panel">
+            <h2>CRON Expression Builder</h2>
+            <div class="row">
+                <div class="group" style="max-width:120px;"><label>Minutes</label><input type="text" id="cron-m" value="*"></div>
+                <div class="group" style="max-width:120px;"><label>Hours</label><input type="text" id="cron-h" value="*"></div>
+                <div class="group" style="max-width:120px;"><label>Day (Month)</label><input type="text" id="cron-dom" value="*"></div>
+                <div class="group" style="max-width:120px;"><label>Month</label><input type="text" id="cron-mon" value="*"></div>
+                <div class="group" style="max-width:120px;"><label>Day (Week)</label><input type="text" id="cron-dow" value="*"></div>
+            </div>
+            <button class="btn" onclick="buildCron()">Build CRON</button>
+            <label>Generated Output</label>
+            <div class="output-box mono" id="cron-output" style="font-size:1.2rem;">* * * * *</div>
+        </div>
+
+        <div id="blindness" class="tool-panel">
+            <h2>Colour Blindness Simulator</h2>
+            <div class="group"><label>Target Visual Palette Tint</label><input type="color" id="cvd-picker" value="#ff5555" style="height:45px; background:none; border:none; width:80px; cursor:pointer;"></div>
+            <div class="row" id="cvd-container"></div>
+        </div>
+
+        <div id="css-gen" class="tool-panel">
+            <h2>CSS Playground</h2>
+            <div class="row">
+                <div class="group" style="max-width:335px;"><label>Shadow Blur Dimensions (px)</label><input type="number" id="css-blur" value="20"></div>
+                <div class="group" style="max-width:335px;"><label>Shadow Accent Vector Hex</label><input type="text" id="css-shadow-color" value="#58a6ff"></div>
+            </div>
+            <div class="row">
+                <div class="group" style="max-width:335px;"><label>Gradient Initial Node</label><input type="text" id="css-grad-1" value="#1f6feb"></div>
+                <div class="group" style="max-width:335px;"><label>Gradient Terminal Node</label><input type="text" id="css-grad-2" value="#238636"></div>
+            </div>
+            <button class="btn" onclick="renderCssCanvas()">View Changes</button>
+            <div class="visual-preview" id="css-element-preview">Click 'View Changes' to see the CSS in action</div>
+            <label>CSS Code Output</label>
+            <pre class="output-box mono" id="css-code-output">-</pre>
+        </div>
+
+        <div id="text-diff" class="tool-panel">
+            <h2>Text Difference</h2>
+            <div class="row">
+                <div class="group" style="flex:1; max-width:335px;"><label>Original Vector (Block A)</label><textarea id="diff-a" placeholder="Original line configuration..."></textarea></div>
+                <div class="group" style="flex:1; max-width:335px;"><label>Modified Vector (Block B)</label><textarea id="diff-b" placeholder="Updated line configuration..."></textarea></div>
+            </div>
+            <button class="btn" onclick="runTextDiff()">Examine Differences</button>
+            <label>Structural Differences Trace Map</label>
+            <div class="output-box" id="diff-output">Comparison layer idle.</div>
+        </div>
+
+        <div id="markdown" class="tool-panel">
+            <h2>Markdown Editor</h2>
+            <div class="group"><label>Markdown Content Input Buffer</label><textarea id="md-input" placeholder="# Heading 1&#10;**Bold text** and *italics* with standard item listings:&#10;- Bullet point one" oninput="renderMarkdown()"></textarea></div>
+            <label>Live HTML Render Frame Canvas</label>
+            <div class="output-box" id="md-output" style="background-color:#fff; color:#000;">Awaiting layout typing inputs...</div>
+        </div>
+
+        <div id="qr-gen" class="tool-panel">
+            <h2>QR Code Generator</h2>
+            <div class="group"><label>Target Resource Link Endpoint</label><input type="text" id="qr-input" value="https://google.com"></div>
+            <button class="btn" onclick="generateQrSymbol()">Generate Vector Target Symbology</button>
+            <label>Result Frame Output</label>
+            <div style="background-color:#fff; padding:1rem; border-radius:6px; width:fit-content;" id="qr-output-frame">-</div>
+        </div>
+
+        <div id="html-strip" class="tool-panel">
+            <h2>Raw HTML Text Stripper</h2>
+
+            <div class="group"><label>Messy Source Vector</label><textarea id="html-strip-input" placeholder="<div class='container'><p>Clean cleartext data block</p></div>"></textarea></div>
+            <button class="btn" onclick="stripHtmlPayload()">Extract Clean Text Payload</button>
+            <label>Sanitizer Output String</label>
+            <div class="output-box" id="html-strip-output">-</div>
+        </div>
+
+        <div id="case-conv" class="tool-panel">
+            <h2>Variable Case Converter</h2>
+            <div class="group"><label>Target Object Key Vector</label><input type="text" id="case-input" value="user_profile_data"></div>
+            <div class="row">
+                <button class="btn btn-secondary" onclick="convertVariableCase('camel')">camelCase</button>
+                <button class="btn btn-secondary" onclick="convertVariableCase('snake')">snake_case</button>
+                <button class="btn btn-secondary" onclick="convertVariableCase('pascal')">PascalCase</button>
+                <button class="btn btn-secondary" onclick="convertVariableCase('kebab')">kebab-case</button>
+            </div>
+            <label>Formatted Property Mapping Output</label>
+            <div class="output-box mono" id="case-output" style="font-size:1.1rem; color:var(--accent);">-</div>
+        </div>
+
+        <div id="meta-preview" class="tool-panel">
+            <h2>SEO Meta Tag Previewer</h2>
+            <div class="group"><label>Page Header Title String</label><input type="text" id="meta-title" value="DevSuite Pro — Professional Utility Hub"></div>
+            <div class="group"><label>Meta Indexing Description Text</label><textarea id="meta-desc" placeholder="Enter standard indexing parameters here...">An all-in-one suite of developer utilities designed for modern frontend engineers and systems architecture optimization teams.</textarea></div>
+            <button class="btn" onclick="previewMetaEngine()">Compile Search Mockup</button>
+            <label>Mock Search Engine Output Result Profile</label>
+            <div class="output-box" style="background-color:#fff; border-radius:8px; padding:1.5rem; max-width:600px;">
+                <span style="color:#202124; font-size:0.85rem; display:block; margin-bottom:2px;">https://yourdomain.com</span>
+                <h3 id="mock-meta-title" style="color:#1a0dab; font-weight:400; font-size:1.25rem; margin-bottom:4px; font-family:arial,sans-serif; cursor:pointer;">DevSuite Pro — Professional Utility Hub</h3>
+                <p id="mock-meta-desc" style="color:#4d5156; font-size:0.9rem; line-height:1.4; font-family:arial,sans-serif;">An all-in-one suite of developer utilities designed for modern frontend engineers and systems architecture optimization teams.</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.querySelector('.responsive-hamburger').addEventListener('click', () => {
+            const aside = document.querySelector('aside');
+            aside.style.display = aside.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Tab Switchboard System Routing
+        function switchTab(tabId) {
+            document.querySelectorAll('.tool-panel').forEach(panel => panel.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.parentElement.classList.add('active');
+
+            if(tabId === 'blindness') renderCVD();
+        }
+
+        // Navigation Search Filter
+        function filterNav() {
+            const query = document.getElementById('nav-search').value.toLowerCase();
+            document.querySelectorAll('.nav-item').forEach(item => {
+                const text = item.textContent.toLowerCase();
+                item.style.display = text.includes(query) ? 'block' : 'none';
+            });
+        }
+
+        // 1. Color Palette Logic
+        const paletteHex = document.getElementById('palette-hex');
+
+        function addPaletteColor() {
+            let hex = paletteHex.value.toUpperCase();
+            if(!/^#?[0-9A-F]{6}$/i.test(hex)) { alert("Please enter a valid 6-digit hex code."); return; }
+            if(!hex.startsWith('#')) {hex = '#' + hex;}
+            const card = document.createElement('div');
+            card.className = 'color-card';
+            card.innerHTML = `<div class="color-preview" style="background-color:${hex}"></div><code style="font-size:0.75rem;">${hex}</code>`;
+            localStorage.setItem(`palette-${Date.now()}`, hex);
+            localStorage.getItem('palette-colors') ? localStorage.setItem('palette-colors', JSON.stringify([...JSON.parse(localStorage.getItem('palette-colors')), hex])) : localStorage.setItem('palette-colors', JSON.stringify([hex]));
+            document.getElementById('palette-display').appendChild(card);
+
+        }
+
+        function loadPaletteColors() {
+            const colors = JSON.parse(localStorage.getItem('palette-colors') || '[]');
+            colors.forEach(hex => {
+                const card = document.createElement('div');
+                card.className = 'color-card';
+                card.innerHTML = `<div class="color-preview" style="background-color:${hex}"></div><code style="font-size:0.75rem;">${hex}</code>`;
+                document.getElementById('palette-display').appendChild(card);
+            });
+        }
+        loadPaletteColors();
+
+        // 2. WCAG Contrast Evaluator
+        document.getElementById('contrast-fore').addEventListener('input', calcContrast);
+        document.getElementById('contrast-back').addEventListener('input', calcContrast);
+
+        function hexToRgb(hex) {
+            const clean = hex.replace('#','').trim();
+            const bigint = parseInt(clean, 16);
+            return isNaN(bigint) || clean.length !== 6 ? {r:0,g:0,b:0} : { r: (bigint >> 16) & 255, g: (bigint >> 8) & 255, b: bigint & 255 };
+        }
+        function getLuminance(c) {
+            const a = [c.r, c.g, c.b].map(v => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); });
+            return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
+        }
+        function calcContrast() {
+            const fore = hexToRgb(document.getElementById('contrast-fore').value);
+            const back = hexToRgb(document.getElementById('contrast-back').value);
+            const l1 = getLuminance(fore), l2 = getLuminance(back);
+            const ratio = ((Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05));
+            const formatted = isNaN(ratio) ? "1.00" : ratio.toFixed(2);
+
+            document.getElementById('contrast-ratio').textContent = formatted;
+
+            const updateStatus = (id, pass) => {
+                const el = document.getElementById(id);
+                el.textContent = pass ? "PASS" : "FAIL";
+                el.className = `wcag-status ${pass ? 'status-pass' : 'status-fail'}`;
+            };
+            updateStatus('cc-aa-normal', ratio >= 4.5);
+            updateStatus('cc-aaa-normal', ratio >= 7.0);
+            updateStatus('cc-aa-large', ratio >= 3.0);
+            updateStatus('cc-aaa-large', ratio >= 4.5);
+        }
+        calcContrast();
+
+        // 3. Code Fragment Manager
+        function saveSnippet() {
+            const title = document.getElementById('snippet-title').value || "Untitled Block";
+            const body = document.getElementById('snippet-body').value;
+            if(!body) return;
+            const item = document.createElement('div');
+            item.className = 'output-box';
+            item.style.marginTop = "0.75rem";
+            item.innerHTML = `<h4 style="margin-bottom:0.4rem; color:#fff;">${title}</h4><pre class="mono" style="background:#0d1117; padding:0.75rem; border-radius:4px; overflow-x:auto;">${body}</pre>`;
+            document.getElementById('snippet-list').appendChild(item);
+            document.getElementById('snippet-title').value = '';
+            document.getElementById('snippet-body').value = '';
+            localStorage.setItem(`snippet-${Date.now()}`, JSON.stringify({ title, body }));
+            localStorage.getItem('code-snippets') ? localStorage.setItem('code-snippets', JSON.stringify([...JSON.parse(localStorage.getItem('code-snippets')), { title, body }])) : localStorage.setItem('code-snippets', JSON.stringify([{ title, body }]));
+        }
+
+        function loadSnippets() {
+            const snippets = JSON.parse(localStorage.getItem('code-snippets') || '[]');
+            snippets.forEach(({ title, body }) => {
+                const item = document.createElement('div');
+                item.className = 'output-box';
+                item.style.marginTop = "0.75rem";
+                item.innerHTML = `<h4 style="margin-bottom:0.4rem; color:#fff;">${title}</h4><pre class="mono" style="background:#0d1117; padding:0.75rem; border-radius:4px; overflow-x:auto;">${body}</pre>`;
+                document.getElementById('snippet-list').appendChild(item);
+            });
+        }
+        loadSnippets();
+
+        // 4. API Core Network Framework
+        async function runApiCall() {
+            const method = document.getElementById('api-method').value;
+            const url = document.getElementById('api-url').value;
+            const body = document.getElementById('api-body').value;
+            const out = document.getElementById('api-output');
+            out.textContent = "Processing pipeline request headers...";
+            try {
+                const conf = { method };
+                if(['POST','PUT'].includes(method) && body) {
+                    conf.body = body;
+                    conf.headers = { 'Content-Type': 'application/json' };
+                }
+                const res = await fetch(url, conf);
+                const data = await res.json();
+                out.textContent = `Response Status Code: ${res.status}\n\n${JSON.stringify(data, null, 2)}`;
+            } catch(e) { out.textContent = `Network Pipeline Trace Fault: ${e.message}`; }
+        }
+
+        // 5. JSON Parsing Utility
+        function processJson(beautify) {
+            const input = document.getElementById('json-input').value;
+            const out = document.getElementById('json-output');
+            try {
+                const parsed = JSON.parse(input);
+                out.textContent = beautify ? JSON.stringify(parsed, null, 4) : JSON.stringify(parsed);
+                out.style.color = "var(--text-main)";
+            } catch(e) { out.textContent = `Parsing Diagnostics Failure: ${e.message}`; out.style.color = "var(--error)"; }
+        }
+
+        // 6. Native JWT Unpacker
+        document.getElementById('jwt-input').addEventListener('input', () => {
+            const token = document.getElementById('jwt-input').value.trim();
+            const segments = token.split('.');
+            const hEl = document.getElementById('jwt-header'), pEl = document.getElementById('jwt-payload');
+            if(segments.length !== 3) { hEl.textContent = "Malformed segment array"; pEl.textContent = "Malformed segment array"; return; }
+            try {
+                hEl.textContent = JSON.stringify(JSON.parse(atob(segments[0])), null, 2);
+                pEl.textContent = JSON.stringify(JSON.parse(atob(segments[1])), null, 2);
+            } catch(e) { hEl.textContent = "Base64 payload syntax exception"; pEl.textContent = "Base64 payload syntax exception"; }
+        });
+
+        // 7. System Epoch Interceptor
+        function convertEpoch() {
+            const val = parseInt(document.getElementById('time-epoch').value);
+            const out = document.getElementById('time-output-human');
+            if(isNaN(val)) { out.textContent = "Invalid format parsing scope"; return; }
+            const d = new Date(val * 1000);
+            out.textContent = `UTC Framework String: ${d.toUTCString()}\nLocalization Mapping Format: ${d.toString()}`;
+        }
+
+        // 8. Base64 & Parameter String Codec
+        function runCodec(type) {
+            const val = document.getElementById('codec-input').value;
+            const out = document.getElementById('codec-output');
+            try {
+                if(type === 'url-enc') out.textContent = encodeURIComponent(val);
+                else if(type === 'url-dec') out.textContent = decodeURIComponent(val);
+                else if(type === 'b64-enc') out.textContent = btoa(val);
+                else if(type === 'b64-dec') out.textContent = atob(val);
+            } catch(e) { out.textContent = `Conversion processing error: ${e.message}`; }
+        }
+
+        // 9. Client WebCrypto Hashes
+        async function generateHash(algo) {
+            const msg = document.getElementById('hash-input').value;
+            const out = document.getElementById('hash-output');
+            try {
+                const encoded = new TextEncoder().encode(msg);
+                const buffer = await crypto.subtle.digest(algo, encoded);
+                out.textContent = Array.from(new Uint8Array(buffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+            } catch(e) { out.textContent = "Subtle Crypto contexts context limitation fault."; }
+        }
+
+        // 10. Random UUID v4 Sequence Token
+        function generateUUID() { document.getElementById('uuid-output').textContent = crypto.randomUUID(); }
+
+        // 11. CRON Evaluator Matrix
+        function buildCron() {
+            const m = document.getElementById('cron-m').value;
+            const h = document.getElementById('cron-h').value;
+            const dom = document.getElementById('cron-dom').value;
+            const mon = document.getElementById('cron-mon').value;
+            const dow = document.getElementById('cron-dow').value;
+            document.getElementById('cron-output').textContent = `${m} ${h} ${dom} ${mon} ${dow}`;
+        }
+
+        // 12. Multi-Spectrum CVD Matrix Simulator
+        function renderCVD() {
+            const rgb = hexToRgb(document.getElementById('cvd-picker').value);
+            const scopes = [
+                { name: "Trichromacy (Standard)", r: rgb.r, g: rgb.g, b: rgb.b },
+                { name: "Protanopia (L-cone fault)", r: Math.round(0.567*rgb.r + 0.433*rgb.g), g: Math.round(0.558*rgb.r + 0.442*rgb.g), b: Math.round(0.242*rgb.g + 0.758*rgb.b) },
+                { name: "Deuteranopia (M-cone fault)", r: Math.round(0.625*rgb.r + 0.375*rgb.g), g: Math.round(0.7*rgb.r + 0.3*rgb.g), b: Math.round(0.3*rgb.g + 0.7*rgb.b) },
+                { name: "Tritanopia (S-cone fault)", r: Math.round(0.95*rgb.r + 0.05*rgb.g), g: Math.round(0.433*rgb.g + 0.567*rgb.b), b: Math.round(0.475*rgb.g + 0.525*rgb.b) }
+            ];
+            const display = document.getElementById('cvd-container');
+            display.innerHTML = '';
+            scopes.forEach(s => {
+                const item = document.createElement('div');
+                item.className = 'color-card';
+                item.style.width = "145px";
+                item.innerHTML = `<div class="color-preview" style="background-color:rgb(${s.r},${s.g},${s.b})"></div><span style="font-size:0.75rem; color:var(--text-muted);">${s.name}</span>`;
+                display.appendChild(item);
+            });
+        }
+        document.getElementById('cvd-picker').addEventListener('input', renderCVD);
+
+        // 15. CSS Layout Elements Matrix
+        function renderCssCanvas() {
+            const blur = document.getElementById('css-blur').value || 0;
+            const shadow = document.getElementById('css-shadow-color').value || "#000";
+            const initNode = document.getElementById('css-grad-1').value || "#fff";
+            const stopNode = document.getElementById('css-grad-2').value || "#000";
+            const preview = document.getElementById('css-element-preview');
+
+            const shadowToken = `0px 8px ${blur}px ${shadow}`;
+            const linearToken = `linear-gradient(135deg, ${initNode}, ${stopNode})`;
+
+            preview.style.boxShadow = shadowToken;
+            preview.style.backgroundImage = linearToken;
+            document.getElementById('css-code-output').textContent = `box-shadow: ${shadowToken};\nbackground-image: ${linearToken};`;
+        }
+
+        // 16. Structural Line Comparison Logic (Text Diff)
+        function runTextDiff() {
+            const a = document.getElementById('diff-a').value.split('\n');
+            const b = document.getElementById('diff-b').value.split('\n');
+            const out = document.getElementById('diff-output');
+            out.innerHTML = '';
+
+            const maxLines = Math.max(a.length, b.length);
+            for(let i=0; i < maxLines; i++) {
+                const row = document.createElement('div');
+                row.style.fontFamily = 'JetBrains Mono, monospace';
+                row.style.fontSize = '0.85rem';
+                row.style.padding = '0.2rem';
+
+                if (a[i] === b[i]) {
+                    row.style.color = 'var(--text-muted)';
+                    row.textContent = `  [Line ${i+1}] ${a[i] || ''}`;
+                } else {
+                    row.style.backgroundColor = 'rgba(218, 54, 51, 0.15)';
+                    row.style.color = '#ff7b72';
+                    row.innerHTML = `≠ [Line ${i+1}] <del style="opacity:0.6;">${a[i] || ''}</del> → <ins style="text-decoration:none; font-weight:bold; color:#56d364;">${b[i] || ''}</ins>`;
+                }
+                out.appendChild(row);
+            }
+        }
+
+        // 17. Safe Modular Markdown Parser
+        function renderMarkdown() {
+            const md = document.getElementById('md-input').value;
+            const out = document.getElementById('md-output');
+            // Basic Markdown parsing (headings, bold, italics, lists)
+            let html = md
+                .replace(/^###### (.*$)/gim, '<h6 style="margin-bottom:0.5rem; color: #333; border-bottom:1px solid #ccc;">$1</h6>')
+                .replace(/^##### (.*$)/gim, '<h5 style="margin-bottom:0.5rem; color: #333; border-bottom:1px solid #ccc;">$1</h5>')
+                .replace(/^#### (.*$)/gim, '<h4 style="margin-bottom:0.5rem; color: #333; border-bottom:1px solid #ccc;">$1</h4>')
+                .replace(/^### (.*$)/gim, '<h3 style="margin-bottom:0.5rem; color: #333; border-bottom:1px solid #ccc;">$1</h3>')
+                .replace(/^## (.*$)/gim, '<h2 style="margin-bottom:0.5rem; color: #333; border-bottom:1px solid #ccc;">$1</h2>')
+                .replace(/^# (.*$)/gim, '<h1 style="margin-bottom:0.5rem; color: #333; border-bottom:1px solid #ccc;">$1</h1>')
+                .replace(/\*\*(.*)\*\*/gim, '<b>$1</b>')
+                .replace(/\*(.*)\*/gim, '<i>$1</i>')
+                .replace(/^- (.*$)/gim, '<li>$1</li>')
+                .replace(/\n/gim, '<br>');
+            out.innerHTML = html;
+        }
+        renderMarkdown();
+
+        // 18. QR Code Image Integration
+        function generateQrSymbol() {
+            const url = encodeURIComponent(document.getElementById('qr-input').value);
+            document.getElementById('qr-output-frame').innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${url}" alt="QR Map Result">`;
+        }
+
+        // 19. HTML Cleansing Transformer Engine
+        function stripHtmlPayload() {
+            const messy = document.getElementById('html-strip-input').value;
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(messy, 'text/html');
+            document.getElementById('html-strip-output').textContent = doc.body.textContent || "";
+        }
+
+        // 20. Variable Case Code Generator
+        function convertVariableCase(type) {
+            const words = document.getElementById('case-input').value.toLowerCase().replace(/[^a-zA-Z0-9 ]/g, ' ').split(/\s+/).filter(Boolean);
+            const out = document.getElementById('case-output');
+            if(!words.length) return;
+
+            if(type === 'snake') out.textContent = words.join('_');
+            else if(type === 'kebab') out.textContent = words.join('-');
+            else if(type === 'camel') out.textContent = words[0] + words.slice(1).map(w => w.charAt(0).toUpperCase() + w.slice(1)).join('');
+            else if(type === 'pascal') out.textContent = words.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join('');
+        }
+
+        // 21. Search Engine Crawl Simulator Previewer
+        function previewMetaEngine() {
+            document.getElementById('mock-meta-title').textContent = document.getElementById('meta-title').value;
+            document.getElementById('mock-meta-desc').textContent = document.getElementById('meta-desc').value;
+        }
+    </script>
+</body>
+</html>
