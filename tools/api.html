@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="../styles.css">
+<title>API Endpoint Tester</title>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>API Endpoint Tester</h1>
+
+<div class="request-bar">
+
+<select id="method">
+
+    <option>GET</option>
+    <option>POST</option>
+    <option>PUT</option>
+    <option>PATCH</option>
+    <option>DELETE</option>
+
+</select>
+
+<input
+type="text"
+id="url"
+placeholder="https://api.example.com/users">
+
+<button onclick="sendRequest()">
+Send
+</button>
+
+<button onclick="clearAll()">
+Clear
+</button>
+
+</div>
+
+<h2>Headers (JSON)</h2>
+
+<textarea id="headers">
+{
+    "Content-Type":"application/json"
+}
+</textarea>
+
+<h2>Body</h2>
+
+<textarea id="body">
+{
+
+}
+</textarea>
+
+<div id="status">
+Ready
+</div>
+
+<div class="notice">
+
+Some APIs block browser requests via CORS.
+If a request fails unexpectedly, the endpoint may require a backend proxy.
+
+</div>
+
+<div class="response-actions">
+
+<h2>Response Body</h2>
+
+<button
+id="copyBtn"
+onclick="copyResponse()">
+
+Copy Response
+
+</button>
+
+</div>
+
+<pre id="response"></pre>
+
+<h2>Response Headers</h2>
+
+<pre id="responseHeaders"></pre>
+
+</div>
+
+<script>
+
+const method =
+document.getElementById("method");
+
+const url =
+document.getElementById("url");
+
+const headersBox =
+document.getElementById("headers");
+
+const bodyBox =
+document.getElementById("body");
+
+const statusBox =
+document.getElementById("status");
+
+const responseBox =
+document.getElementById("response");
+
+const responseHeadersBox =
+document.getElementById("responseHeaders");
+
+async function sendRequest(){
+
+    let headers = {};
+
+    try{
+
+        headers = JSON.parse(
+            headersBox.value
+        );
+
+    }
+
+    catch{
+
+        statusBox.textContent =
+        "Invalid headers JSON";
+
+        return;
+    }
+
+    const options = {
+
+        method:method.value,
+        headers
+
+    };
+
+    const rawBody =
+    bodyBox.value.trim();
+
+    if(
+
+        method.value !== "GET" &&
+        rawBody
+
+    ){
+
+        options.body = rawBody;
+
+    }
+
+    statusBox.textContent =
+    "Sending...";
+
+    responseBox.textContent = "";
+    responseHeadersBox.textContent = "";
+
+    try{
+
+        const res =
+        await fetch(
+
+            url.value,
+            options
+
+        );
+
+        const text =
+        await res.text();
+
+        statusBox.innerHTML =
+
+        `Status:
+        <strong>
+        ${res.status}
+        </strong>
+
+        ${res.statusText}`;
+
+        let headerText = "";
+
+        res.headers.forEach(
+
+        (value,key)=>{
+
+            headerText +=
+            `${key}: ${value}\n`;
+
+        }
+
+        );
+
+        responseHeadersBox
+        .textContent =
+        headerText ||
+
+        "No response headers";
+
+        try{
+
+            const json =
+            JSON.parse(text);
+
+            responseBox
+            .textContent =
+
+            JSON.stringify(
+                json,
+                null,
+                2
+            );
+
+        }
+
+        catch{
+
+            responseBox
+            .textContent =
+            text;
+
+        }
+
+    }
+
+    catch(err){
+
+        statusBox.textContent =
+
+        "Request Failed";
+
+        responseBox.textContent =
+
+        err.message;
+
+    }
+
+}
+
+function clearAll(){
+
+    url.value = "";
+
+    headersBox.value =
+
+`{
+    "Content-Type":"application/json"
+}`;
+
+    bodyBox.value =
+
+`{
+
+}`;
+
+    responseBox.textContent =
+    "";
+
+    responseHeadersBox
+    .textContent = "";
+
+    statusBox.textContent =
+    "Ready";
+}
+
+function copyResponse(){
+
+    navigator.clipboard.writeText(
+
+        responseBox.textContent
+
+    );
+
+    const btn =
+    document.getElementById(
+        "copyBtn"
+    );
+
+    btn.textContent =
+    "Copied!";
+
+    setTimeout(()=>{
+
+        btn.textContent =
+        "Copy Response";
+
+    },1000);
+
+}
+
+</script>
+
+</body>
+</html>
